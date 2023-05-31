@@ -1,0 +1,105 @@
+body,
+html {
+    font-size: 16px;
+
+    &,
+    * {
+        font-family: 'vw-text';
+        line-height: 1.2;
+    }
+}
+
+p {
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.fs-1 {
+    font-size: rem(50);
+}
+
+.fs-2 {
+    font-size: rem(22);
+}
+
+.fs-3 {
+    font-size: rem(14);
+}
+
+.fs-4 {
+    font-size: rem(12);
+}
+
+.fs-5 {
+    font-size: rem(10);
+}
+
+.bold,
+.bold * {
+    font-weight: 700;
+}
+
+.fw-900 {
+    font-weight: 900;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.white,
+.white * {
+    color: white;
+}
+
+.color-primary {
+    color: var(--clr-primary);
+}
+
+.title {
+    font-weight: 600;
+    color: #000000;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.title-section,
+.title-section * {
+    font-family: 'vw-head';
+    font-weight: 200;
+    font-size: rem(50);
+    line-height: 1.1;
+    margin-bottom: rem(32);
+
+    @media(max-width: $mobileEnd) {
+        font-size: rem(32);
+        margin-bottom: rem(40);
+    }
+}

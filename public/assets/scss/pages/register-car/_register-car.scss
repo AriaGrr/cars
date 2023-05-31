@@ -1,0 +1,158 @@
+.register-car-page {
+    width: 100%;
+    height: 100svh;
+    background: radial-gradient(circle at 0% 0%, rgb(0, 67, 122) 0%, rgb(0, 30, 80) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__form {
+        background: rgb(0, 67, 122);
+        box-shadow: 0px 15px 24px rgba(0, 0, 0, 0.09);
+        color: var(--white);
+        max-width: max-content;
+        padding: rem(40);
+        border-radius: 5px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+        max-width: rem(800);
+    }
+
+    &__desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h1 {
+            font-size: rem(35);
+            margin-bottom: rem(25);
+        }
+
+        p {
+            font-size: rem(15);
+            font-weight: 400;
+            max-width: 80%;
+        }
+    }
+
+    &__return-msg {
+        // color: #17feb9;
+        color: #f75a68;
+        display: none;
+        font-size: rem(15);
+        margin-top: rem(25);
+        text-align: center;
+    }
+
+    &__inputs {
+        form {
+            display: flex;
+            flex-direction: column;
+
+            input:not([type="file"]), select {
+                border: 1px solid var(--white);
+                border-radius: 1px;
+                margin-bottom: rem(25);
+                color: var(--white);
+                padding: rem(10);
+
+                &::placeholder {
+                    color: var(--white);
+                    opacity: 0.8;
+                }
+            }
+
+            input[type="file"] {
+
+                margin-bottom: rem(25);
+                color: var(--white);
+                margin-top: rem(15);
+
+            }
+        }
+
+        button {
+            color: var(--white);
+            background-color: rgb(0, 30, 80);
+            margin-top: rem(10);
+            margin-bottom: auto;
+            padding: rem(10);
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(12, 79, 133);
+                color: var(--white);
+            }
+        }
+    }
+
+
+    .register-a {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: rem(10);
+        margin-top: auto;
+
+        a {
+            color: var(--white);
+            background-color: rgb(0, 30, 80);
+            text-decoration: none;
+            padding: rem(10);
+            font-size: small;
+            text-align: center;
+
+            &:hover {
+                background-color: rgb(12, 79, 133);
+                color: var(--white);
+            }
+        }
+    }
+
+    #change-car-form {
+        display: none;
+    }
+
+    a {
+        color: var(--white);
+        background-color: rgb(0, 30, 80);
+        text-decoration: none;
+        padding: rem(10);
+        font-size: small;
+        text-align: center;
+        margin-top: auto;
+
+        &:hover {
+            background-color: rgb(12, 79, 133);
+            color: var(--white);
+        }
+    }
+}
+
+
+@media(max-width:768px) {
+    .register-car-page {
+        height: max-content;
+
+        &__form {
+            display: block;
+            margin: rem(115) rem(40) rem(40);
+
+            input[type="file"] {
+                max-width: 100%;
+            }
+        }
+
+        &__desc {
+            h1 {
+                font-size: rem(30);
+            }
+
+            p {
+                max-width: unset;
+                margin-bottom: rem(25);
+            }
+        }
+    }
+}

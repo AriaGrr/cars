@@ -25,14 +25,25 @@
                 <p>Após preencher com as informações basta retornar a
                     página inicial para conferir o seu veículo
                 </p>
+                <div class="register-a">
+                    <a href="index.html">Página inicial</a>
+                    <a href="register-car.html">Retornar</a>
+                </div>
             </div>
             <div class="register-car-page__inputs">
-                <form action="">
+                <form id="cars-selector-form">
+                    <select id="carsSelector" class="cars-selector" name="carId">
+
+                    </select>
+                    <button type="submit">Editar</button>
+                </form>
+                <form id="change-car-form">
+                    <input type="hidden" name="_id" placeholder="Id" required>
                     <input type="text" name="model" placeholder="Modelo" required>
                     <input type="number" min="0" name="stock" placeholder="Quantidade em estoque" required>
                     <input type="text" name="year" placeholder="Ano do carro" required>
-                    <input type="text" name="marca" placeholder="Marca" required>
-                    <button type="submit">Cadastrar Veículo</button>
+                    <input type="text" name="brand" placeholder="Marca" required>
+                    <button type="submit">Alterar Veículo</button>
                     <div class="register-car-page__return-msg"></div>
                 </form>
             </div>

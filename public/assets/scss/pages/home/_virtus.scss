@@ -1,0 +1,66 @@
+.virtus {
+    display: flex;
+
+    &__wrapper {
+        background: radial-gradient(circle at 0% 0%, rgb(0, 67, 122) 0%, rgb(0, 30, 80) 100%);
+        color: var(--white);
+        padding: rem(70) rem(260) rem(50) rem(160);
+        max-width: max-content;
+        top: 20px;
+        width: 50%;
+    }
+
+    a {
+        color: var(--font-color-1);
+        background: var(--white);
+        padding: rem(10) rem(20);
+        margin-bottom: rem(32);
+        border-radius: 22px;
+        display: block;
+        max-width: max-content;
+
+        &:hover {
+            background: #001e50;
+            color: var(--white);
+        }
+    }
+
+    .fs-2 {
+        margin-bottom: rem(32);
+        font-family: 'vw-head';
+        font-weight: 200;
+    }
+
+
+    &__image {
+        height: rem(334);
+        width: 50%;
+
+        img {
+            max-height: 100%;
+            margin: 0 auto;
+            display: block;
+        }
+    }
+
+}
+
+@media(max-width:768px) {
+    .virtus {
+        display: block;
+
+        &__wrapper {
+            padding: rem(40);
+            width: 100%;
+            text-align: center;
+        }
+
+        a {
+            margin: 0 auto;
+        }
+
+        &__image {
+            display: none;
+        }
+    }
+}

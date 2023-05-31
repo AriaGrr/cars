@@ -1,0 +1,17 @@
+.hover-right, .hover-top, .hover-left, .hover-scale{
+    transition: all .3s;
+    display: block;
+}
+
+.hover-right:hover{
+    transform: translateX(5px);
+}
+.hover-left:hover{
+    transform: translateX(-5px);
+}
+.hover-top:hover{
+    transform: translateY(-5px);
+}
+.hover-scale:hover{
+    transform: scale(1.1);
+}

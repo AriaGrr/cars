@@ -60,3 +60,181 @@ $("#register-form").submit(async (e) => {
     }
 });
 
+$("#register-car-form").submit(async (e) => {
+    e.preventDefault();
+
+    $(".register-car-page__error").css("display", "none");
+
+    const brand = e.target.querySelector('input[name="brand"]').value;
+    const model = e.target.querySelector('input[name="model"]').value;
+    const year = e.target.querySelector('input[name="year"]').value;
+    const stock = e.target.querySelector('input[name="stock"]').value;
+
+    const response = await fetch("http://localhost:3000/createCar", {
+        method: "POST",
+        body: JSON.stringify({
+            brand,
+            model,
+            year,
+            stock,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+        console.log(data.error);
+        $(".register-car-page__error").css("display", "block");
+        $(".register-car-page__error").html(data.error);
+    } else {
+        window.location.href = "./index.html";
+    }
+});
+
+let cars;
+
+fetch('/getCars').then((response) => {
+    response.json().then((data) => {
+        cars = data;
+        displayCars();
+        carsSelector();
+    })
+})
+
+function displayCars() {
+    const carsContainer = document.getElementById('carsContainer');
+    if (!carsContainer) {
+        return;
+    }
+
+    cars.forEach((car) => {
+        const carElement = document.createElement('div');
+        carElement.innerHTML = `
+                <div class="stock__item">                    
+                <div class="stock__item__info">
+                <h3>${car.model}</h3>
+                <p class="fw-700">Estoque: ${car.stock}</p> 
+                <p>${car.year}</p>
+                <p>${car.brand}</p>
+                <button id="${car._id}" class="car_buy">
+                    Comprar
+                </button>
+                </div> 
+                </div>                      
+            `;
+        carsContainer.appendChild(carElement);
+    });
+}
+
+function carsSelector() {
+    const carsSelector = document.getElementById('carsSelector');
+    if (!carsSelector) {
+        return;
+    }
+
+    cars.forEach((car) => {
+        carsSelector.innerHTML = `
+                <option value="${car._id}">${car.model}</option>                     
+            `;
+    });
+}
+
+$("#cars-selector-form").submit((e) => {
+    e.preventDefault();
+
+    $("#cars-selector-form").css("display", "none");
+    $("#change-car-form").css("display", "flex");
+
+    const _id = e.target.carId.value;
+
+    const car = cars.find((car) => car._id === _id);
+
+    $("#change-car-form input[name='_id']").val(car._id);
+    $("#change-car-form input[name='brand']").val(car.brand);
+    $("#change-car-form input[name='model']").val(car.model);
+    $("#change-car-form input[name='year']").val(car.year);
+    $("#change-car-form input[name='stock']").val(car.stock);
+});
+
+$("#change-car-form").submit(async (e) => {
+    e.preventDefault();
+
+    $(".register-car-page__return-msg").css("display", "none");
+
+    const _id = e.target._id.value;
+    const brand = e.target.brand.value;
+    const model = e.target.model.value;
+    const year = e.target.year.value;
+    const stock = e.target.stock.value;
+
+    const response = await fetch("http://localhost:3000/updateCar", {
+        method: "PUT",
+        body: JSON.stringify({
+            _id,
+            brand,
+            model,
+            year,
+            stock,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+        console.log(data.error);
+        $(".register-car-page__return-msg").css("display", "block");
+        $(".register-car-page__return-msg").html(data.error);
+    } else {
+        $(".register-car-page__return-msg").html("Carro atualizado com sucesso!");
+        $(".register-car-page__return-msg").css("display", "block");
+        $(".register-car-page__return-msg").css("color", "green");
+    }
+});
+
+$(".car_buy").click(async (e) => {
+            e.preventDefault();
+
+
+            const _id = e.target._id;
+            const car = cars.find((car) => car._id === _id);
+
+
+            if (Number(car.stock) == 0) {
+                $(".register-car-page__return-msg").html("Carro sem estoque!");
+                $(".register-car-page__return-msg").css("display", "block");
+                $(".register-car-page__return-msg").css("color", "red");
+                return;
+            } else {
+                const response = await fetch("http://localhost:3000/updateCar", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        _id,
+                        brand: car.brand,
+                        model: car.model,
+                        year: car.year,
+                        stock: Number(car.stock) - 1,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    $(".register-car-page__return-msg").css("display", "block");
+                    $(".register-car-page__return-msg").html(data.error);
+                } else {
+                    $(".register-car-page__return-msg").html("Carro comprado com sucesso!");
+                    $(".register-car-page__return-msg").css("display", "block");
+                    $(".register-car-page__return-msg").css("color", "green");
+                }
+            }
+        });
+

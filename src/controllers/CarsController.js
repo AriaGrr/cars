@@ -5,7 +5,7 @@ const carSchema = new mongoose.Schema({
     model: String,
     stock: Number,
     year: String,
-    marca: String,
+    brand: String,
 });
 
 export const Car = mongoose.model("Car", carSchema);
@@ -16,7 +16,7 @@ export class CarsController {
             model,
             stock,
             year,
-            marca
+            brand
         } = req.body;
 
         //Busca o carro no banco de dados
@@ -33,7 +33,7 @@ export class CarsController {
             model,
             stock,
             year,
-            marca
+            brand
         });
 
         await newCar.save();
@@ -46,7 +46,7 @@ export class CarsController {
             });
     }
 
-    async listCars(req, res) {
+    async getCars(req, res) {
         const cars = await Car.find();
 
         return res.json(cars);
@@ -54,14 +54,15 @@ export class CarsController {
 
     async updateCar(req, res) {
         const {
+            _id,
             model,
             stock,
             year,
-            marca
+            brand
         } = req.body;
 
         const car = await Car.findOne({
-            model: model
+            _id: _id
         });
         if (!car) {
             return res.status(400).json({
@@ -69,9 +70,10 @@ export class CarsController {
             });
         }
 
+        car.model = model;
         car.stock = stock;
         car.year = year;
-        car.marca = marca;
+        car.brand = brand;
 
         await car.save();
 
@@ -80,11 +82,11 @@ export class CarsController {
 
     async deleteCar(req, res) {
         const {
-            model
+            _id
         } = req.body;
 
         const car = await Car.findOne({
-            model: model
+            _id: _id
         });
         if (!car) {
             return res.status(400).json({
@@ -92,7 +94,7 @@ export class CarsController {
             });
         }
 
-        await car.delete();
+        await car.deleteOne();
 
         return res.json({
             message: "Carro deletado com sucesso"

@@ -1,9 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import {
-    routes
-} from "./routes/routes.js";
+import routes from "./routes/routes.js";
 
 
 dotenv.config();
@@ -13,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("./public"));
-
+app.use(routes)
 
 function startServer() {
     app.listen(

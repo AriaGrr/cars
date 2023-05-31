@@ -1,0 +1,7 @@
+@function rem($value) {
+    @return calc( $value / 16) * 1rem;
+}
+
+@function vw($val, $width: 1920){
+    @return calc( ( $val / ($width / 100) ) ) * 1vw;
+}

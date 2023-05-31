@@ -65,7 +65,9 @@ export class UserController {
                 error: "Usuário ou senha incorreto"
             });
         }
-
-        return res.status(200)
+        return res.status(200).json({
+            message: "Usuário logado com sucesso",
+            user
+        });
     }
 }

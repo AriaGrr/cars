@@ -25,13 +25,17 @@
                 <p>Após preencher com as informações basta retornar a
                     página inicial para conferir o seu veículo
                 </p>
+
+                <a href="index.html">Página inicial</a>
+                <a href="change-car.html">Atualizar Carro</a>
+
             </div>
             <div class="register-car-page__inputs">
-                <form action="">
+                <form id="register-car-form">
                     <input type="text" name="model" placeholder="Modelo" required>
                     <input type="number" min="0" name="stock" placeholder="Quantidade em estoque" required>
                     <input type="text" name="year" placeholder="Ano do carro" required>
-                    <input type="text" name="marca" placeholder="Marca" required>
+                    <input type="text" name="brand" placeholder="Marca" required>
                     <button type="submit">Cadastrar Veículo</button>
                     <div class="register-car-page__return-msg"></div>
                 </form>

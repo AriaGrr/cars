@@ -1,0 +1,99 @@
+//=====================================
+//|             classes               |
+//=====================================
+html{
+	overflow-x: hidden;
+}
+
+html, body{
+	min-height: 100vh;
+	scrollbar-color: var( --clr-primary );
+	user-select: none;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		transition: all .1s;
+	}
+	
+	&::-webkit-scrollbar-track {
+		background: #fff;   
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background-color: var( --clr-primary ); 
+		transition: all .2s;
+		border-radius: 20px;
+	}
+
+	strong{
+		font-weight: 700;
+	}
+
+	&.hide-scrollbar{
+		&::-webkit-scrollbar-thumb {
+			background-color: #fff; 
+		}
+
+	}
+}
+
+.anchor-link{	
+	scroll-margin-top: rem(100);
+}
+
+.container{
+	width: 100%;
+	max-width: rem(1215);
+	margin: 0 auto;
+
+	@media(max-width: $mobileEnd){
+		padding: 0 rem(20);
+		max-width: 100%;
+	}
+}
+
+
+.container-img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img{
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.hide-mobile{
+	@media(max-width: $mobileEnd){
+		display: none !important;
+	}
+}
+
+.hide-desktop{
+	@media(min-width: $mobileEnd){
+		display: none !important;
+	}
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-left{
+	text-align: left;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.underscore {
+	text-decoration: underline;
+}
+
+.overflow-hidden {
+	overflow: hidden !important;
+}
