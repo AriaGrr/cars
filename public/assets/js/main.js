@@ -31,11 +31,24 @@ $("#login-form").submit(async (e) => {
 $("#register-form").submit(async (e) => {
     e.preventDefault();
 
-    $(".register-page__error").css("display", "none");
+    $(".login-page__error").css("display", "none");
 
     const name = e.target.querySelector('input[name="name"]').value;
     const username = e.target.querySelector('input[name="username"]').value;
     const password = e.target.querySelector('input[name="password"]').value;
+    const confirmPassword = e.target.querySelector('input[name="confirmPassword"]').value;
+
+    if (password.length < 6) {
+        $(".login-page__error").css("display", "block");
+        $(".login-page__error").html("A senha deve ter no mínimo 6 caracteres");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        $(".login-page__error").css("display", "block");
+        $(".login-page__error").html("As senhas não coincidem");
+        return;
+    }
 
     const response = await fetch("http://localhost:3000/createUser", {
         method: "POST",
@@ -53,9 +66,10 @@ $("#register-form").submit(async (e) => {
 
     if (data.error) {
         console.log(data.error);
-        $(".register-page__error").css("display", "block");
-        $(".register-page__error").html(data.error);
+        $(".login-page__error").css("display", "block");
+        $(".login-page__error").html(data.error);
     } else {
+        alert("Usuário criado com sucesso");
         window.location.href = "./login.html";
     }
 });

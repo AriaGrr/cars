@@ -21,11 +21,12 @@
     <section class="login-page">
         <div class="login-page__form">
             <h1 class="title-section">Criar Conta</h1>
-            <form>
-                <input type="text" placeholder="Nome">
-                <input type="text" placeholder="Nome de Usuário">
-                <input type="password" placeholder="Senha">
-                <input type="password" placeholder="Confirme a sua senha">
+            <form id="register-form">
+                <input type="text" name="name" placeholder="Nome">
+                <input type="text" name="username" placeholder="Nome de Usuário">
+                <input type="password" name="password" placeholder="Senha">
+                <input type="password" name="confirmPassword" placeholder="Confirme a sua senha">
+                <div class="login-page__error"></div>
                 <button type="submit">Registrar</button>
             </form>
 
