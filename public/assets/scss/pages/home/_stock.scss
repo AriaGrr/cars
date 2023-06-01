@@ -40,17 +40,26 @@
                 border: 1px solid rgb(0, 30, 80);
                 background: var(--white);
                 color: rgb(0, 30, 80);
+                cursor: pointer;
 
                 &:hover {
                     color: var(--white);
                     background: rgb(0, 30, 80);
                 }
             }
+
+            button[disabled] {
+                background: #001e50;
+                color: var(--white);
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
         }
 
     }
 
 }
+
 @media(max-width:768px) {
     .stock {
         &__list {

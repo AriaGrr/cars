@@ -111,6 +111,10 @@ function displayCars() {
     }
 
     cars.forEach((car) => {
+        const carAvailable = {
+            disableButton: car.stock === 0 ? "disabled" : "",
+            buttonText: car.stock === 0 ? "Esgotado" : "Comprar",
+        }
         const carElement = document.createElement('div');
         carElement.innerHTML = `
                 <div class="stock__item">                    
@@ -119,8 +123,8 @@ function displayCars() {
                 <p class="fw-700">Estoque: ${car.stock}</p> 
                 <p>${car.year}</p>
                 <p>${car.brand}</p>
-                <button id="${car._id}" class="car_buy" onclick="buyCar()">
-                    Comprar
+                <button id="${car._id}" class="car_buy" onclick="buyCar()" ${carAvailable.disableButton}>
+                    ${carAvailable.buttonText}
                 </button>
                 </div> 
                 </div>                      
