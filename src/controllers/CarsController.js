@@ -79,7 +79,40 @@ export class CarsController {
 
         return res.json(car);
     }
+    async buyCar(req, res) {
+        const {
+            _id
+        } = req.body;
 
+        const car = await Car.findOne({
+            _id: _id
+        });
+
+        if (!car) {
+            return res.status(400).json({
+                error: "Carro não encontrado"
+            });
+        }
+
+        let carStock = Number(car.stock);
+
+        if (carStock <= 0) {
+            return res.status(400).json({
+                error: "Estoque insuficiente"
+            });
+        }
+
+        carStock = carStock - 1;
+
+        car.stock = carStock;
+
+        await car.save();
+
+        return res.status(200).json({
+            message: "Carro comprado com sucesso",            
+            model: car.model
+        });
+    }
     async deleteCar(req, res) {
         const {
             _id

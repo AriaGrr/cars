@@ -119,7 +119,7 @@ function displayCars() {
                 <p class="fw-700">Estoque: ${car.stock}</p> 
                 <p>${car.year}</p>
                 <p>${car.brand}</p>
-                <button id="${car._id}" class="car_buy">
+                <button id="${car._id}" class="car_buy" onclick="buyCar()">
                     Comprar
                 </button>
                 </div> 
@@ -197,44 +197,26 @@ $("#change-car-form").submit(async (e) => {
     }
 });
 
-$(".car_buy").click(async (e) => {
-            e.preventDefault();
 
+async function buyCar() {
+    let carID = event.target.id;
+    const response = await fetch("http://localhost:3000/buyCar", {
+        method: "PATCH",
+        body: JSON.stringify({
+            _id: carID
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
 
-            const _id = e.target._id;
-            const car = cars.find((car) => car._id === _id);
+    });
 
+    const data = await response.json();
 
-            if (Number(car.stock) == 0) {
-                $(".register-car-page__return-msg").html("Carro sem estoque!");
-                $(".register-car-page__return-msg").css("display", "block");
-                $(".register-car-page__return-msg").css("color", "red");
-                return;
-            } else {
-                const response = await fetch("http://localhost:3000/updateCar", {
-                    method: "PUT",
-                    body: JSON.stringify({
-                        _id,
-                        brand: car.brand,
-                        model: car.model,
-                        year: car.year,
-                        stock: Number(car.stock) - 1,
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-
-                const data = await response.json();
-
-                if (data.error) {
-                    $(".register-car-page__return-msg").css("display", "block");
-                    $(".register-car-page__return-msg").html(data.error);
-                } else {
-                    $(".register-car-page__return-msg").html("Carro comprado com sucesso!");
-                    $(".register-car-page__return-msg").css("display", "block");
-                    $(".register-car-page__return-msg").css("color", "green");
-                }
-            }
-        });
-
+    if (data.error) {
+        console.log(data.error);
+    } else {
+        alert(`${data.model} comprado com sucesso!`);
+        window.location.href = "./index.html";
+    }
+}
