@@ -85,13 +85,19 @@
 
             select {
                 margin-bottom: rem(10);
+                * {
+                    color: #000;
+                }
             }
         }
+
+        #change-button {
+            margin-bottom: rem(10);
+            }
 
         button {
             color: var(--white);
             background-color: rgb(0, 30, 80);
-            margin-bottom: auto;
             padding: rem(10);
             cursor: pointer;
 

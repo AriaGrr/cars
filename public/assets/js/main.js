@@ -112,6 +112,7 @@ function displayCars() {
 
     cars.forEach((car) => {
         const carAvailable = {
+            // If else em linha: condição ? true : false
             disableButton: car.stock === 0 ? "disabled" : "",
             buttonText: car.stock === 0 ? "Esgotado" : "Comprar",
         }
@@ -140,9 +141,10 @@ function carsSelector() {
     }
 
     cars.forEach((car) => {
-        carsSelector.innerHTML = `
-                <option value="${car._id}">${car.model}</option>                     
-            `;
+        const carElement = document.createElement('option');
+        carElement.value = car._id;
+        carElement.innerHTML = car.model;
+        carsSelector.appendChild(carElement);
     });
 }
 
@@ -161,6 +163,35 @@ $("#cars-selector-form").submit((e) => {
     $("#change-car-form input[name='model']").val(car.model);
     $("#change-car-form input[name='year']").val(car.year);
     $("#change-car-form input[name='stock']").val(car.stock);
+
+    $("#delete-car").val(car._id);
+    // Após o clique no botão ele irá deletar o carro exibir uma mensagem de sucesso
+    $("#delete-car").click(async (e) => {
+        e.preventDefault();
+
+        const _id = e.target.value;
+
+        const response = await fetch("http://localhost:3000/deleteCar", {
+            method: "DELETE",
+            body: JSON.stringify({
+                _id,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.log(data.error);
+            $(".register-car-page__return-msg").css("display", "block");
+            $(".register-car-page__return-msg").html(data.error);
+        } else {
+            $(".register-car-page__return-msg").css("display", "block");
+            $(".register-car-page__return-msg").html("Carro deletado com sucesso!");
+        }
+    });
 });
 
 $("#change-car-form").submit(async (e) => {
